@@ -49,9 +49,63 @@ My project aimed to accomplish the following goals:
   The `StructConstructor` node needs to be replaced by the `__init__` function call for correct initialization of the object's attributes. However, doing this in the AST-to-ASR conversion was semantically lowering the language. Hence, this replacement was refactored in the ASR-to-ASR pass called `ClassConstructor`.
 
 - [Initial Implementation of Inheritance and Polymorphic Function Calls](https://github.com/lcompilers/lpython/pull/2801):  
-  This was a significant patch that implemented basic inheritance and polymorphic function calls. It included the implementation of `super()`. It was decided not to support multiple inheritance to avoid complexity. Additionally, it enabled function calls of the type `fn(arg: Base)` to accept arguments of type `Derived`. This was achieved through implicit casting of the argument to the Base class.
+  This was a significant patch that implemented basic inheritance and polymorphic function calls. It included the implementation of `super()`. It was decided not to support multiple inheritance to avoid complexity. Additionally, it enabled function calls of the type `fn(arg: Base)` to accept arguments of type `Derived`. This was achieved through implicit casting of the argument to the Base class.  
+
+**Issues:**
+
+- [#2680](https://github.com/lcompilers/lpython/issues/2680)
+- [#2722](https://github.com/lcompilers/lpython/issues/2722)
+- [#2723](https://github.com/lcompilers/lpython/issues/2723)
+- [#2776](https://github.com/lcompilers/lpython/issues/2776)
+- [#2777](https://github.com/lcompilers/lpython/issues/2777)
+- [#2781](https://github.com/lcompilers/lpython/issues/2781)
+- [#2797](https://github.com/lcompilers/lpython/issues/2797)
+- [#2799](https://github.com/lcompilers/lpython/issues/2799)
+- [#2800](https://github.com/lcompilers/lpython/issues/2800)
+
+## Output
+Lpython is able to successfully compile and run code using the OOP paradigm.  
+Example:
+```py
+from lpython import i32
+
+class Base():
+    def __init__(self:"Base"):
+        self.x : i32 = 10
+
+    def get_x(self:"Base")->i32:
+        print(self.x)
+        return self.x
+    
+def get_x_static(d: Base)->i32:
+    print(d.x)
+    return d.x
+
+class Derived(Base):
+    def __init__(self: "Derived"):
+        super().__init__()
+        self.y : i32 = 20 
+
+    def get_y(self:"Derived")->i32:
+        print(self.y)
+        return self.y       
 
 
+def main():
+    d : Derived = Derived()
+    x : i32 = get_x_static(d)
+    assert x == 10
+    x = d.get_x()
+    assert x == 10
+    y: i32 = d.get_y()
+    assert y == 20
 
-
-
+main()
+```
+Output:
+```
+(lp) tanay@tanay-man:~/lcompilers/lpython$ lpython integration_tests/class_06.py 
+10
+10
+20
+```
