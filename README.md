@@ -16,6 +16,7 @@ The following report summarizes the work done during Google Summer of Code 2024 
 - **Project Title:** Implementation of Classes and OOP Features
 - **Project Link:** [LPython GitHub Repository](https://github.com/lcompilers/lpython)
 - **Project Mentors:** [Ondřej Čertík](https://github.com/certik), [Thirumalai Shaktivel](https://github.com/Thirumalai-Shaktivel)
+- **Weekly updates** [Updates](https://social.python-gsoc.org/@tanay_man)
 
 ## Project Synopsis
 My project aimed to accomplish the following goals:
@@ -109,3 +110,20 @@ Output:
 10
 20
 ```
+## Remaining tasks
+I couldn't complete the implementation of a couple of tasks that I had mentioned in the proposal. I will complete these after the GSoC period:
+
+- **Runtime polymorphism**  
+  Runtime polymorphism is a key feature of object-oriented programming, allowing derived classes to override methods of base classes and enabling dynamic method resolution at runtime. This is typically achieved through the use of virtual tables (vtables) and dynamic dispatch. While I made significant progress in implementing inheritance and basic polymorphic function calls, I could not fully implement runtime polymorphism during the GSoC period. This would involve completing the vtable setup for classes and ensuring that overridden methods are correctly resolved and called at runtime, providing the expected behavior for inherited methods. Completing this task will be crucial for enabling advanced object-oriented programming features in LPython.  
+
+- **Dunder functions**  
+  Python has many special functions called dunder functions, such as `__str__`, `__repr__`, `__add__`, etc. These functions are automatically called when specific operations or built-in functions are used on objects. For example, `__str__` is called when `str(object)` is invoked, `__repr__` is used when `repr(object)` is called, and `__add__` is called when the `+` operator is used between two objects. Implementing these functions requires integrating them into the LPython runtime and ensuring that they behave as expected. Although this was a planned task, I could not complete it within the GSoC period. This will be an important feature to add in the future to improve the usability and compatibility of LPython with existing Python code.
+
+## Future Scope
+- **Implementing Multiple Inheritance:** Expanding LPython to support multiple inheritance, which would enable greater code reuse and compatibility with CPython. This would allow classes to inherit features from more than one base class, a common pattern in Python.
+
+- **Advanced Data Structures Using Classes:** Developing and implementing advanced data structures such as trees, graphs, and heaps using classes. This would pave the way for a more comprehensive implementation of the Python standard library within LPython.
+
+## Thank You!
+I would like to express my gratitude to Ondřej Čertík for conceiving this remarkable compiler. My mentors, Ondřej Čertík and Thirumalai Shaktivel, provided invaluable guidance and support throughout the project. I also want to extend my thanks to all the LPython contributors, whose work laid the foundation for my contributions. Thank you!
+
